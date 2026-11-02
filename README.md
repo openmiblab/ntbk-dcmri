@@ -1,24 +1,11 @@
-# Case studies of miblab image processing pipelines
+# Application examples of the dcmri package
 
 
 ## Installation
 
-On Windows:
-
-Create a python environment:
+From the repository root ntbk-dcmri:
 
 ```bash
-python -m venv .venv
-```
-
-Activate it:
-
-```bash
-.venv/Scripts/activate
-```
-
-Install the required packages:
-
-```bash
-pip install .
+conda env create -f env.yml
+conda activate ntbk_dcmri
 ```

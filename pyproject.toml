@@ -3,18 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "case-studies"
+name = "ntbk-dcmri"
 version = "0.0.1"
 dependencies = [
-  'numpy==2.3.3',
-  'napari[all]==0.6.4',
-  'matplotlib==3.10.6',
-  'dbdicom==0.3.13',
-  'vreg==0.0.10',
-  'miblab[dlseg]==0.0.23',
-  'mdreg[ants]==0.5.2',
-  'dcmri==0.6.19',
-  'pydmr==0.0.5',
 ]
 
 [tool.setuptools.packages.find]
