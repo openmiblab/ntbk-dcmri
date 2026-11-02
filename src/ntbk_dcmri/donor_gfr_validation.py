@@ -14,8 +14,8 @@ Data received from Jakob Spogis
 import os
 from pathlib import Path
 
-import matplotlib
-matplotlib.use("TkAgg")   # or "QtAgg" if you want to keep Qt
+# import matplotlib
+# matplotlib.use("TkAgg")   # or "QtAgg" if you want to keep Qt
 
 import numpy as np
 import pandas as pd
@@ -86,6 +86,8 @@ def fit_single_subj(subj, data, outputdir):
     model.plot(data, result, fname=plot_file, show=False)
     model.plot_pcov(result, plot_file_pcov, show=False, vmin=-0.01, vmax=0.01)
     model.plot_pvar(result, plot_file_pvar, show=False, xlim=[-3, 3])
+
+    return model, result
 
     # model.print(result)
 
