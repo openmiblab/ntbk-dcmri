@@ -89,11 +89,6 @@ def fit_single_subj(subj, data, outputdir):
 
     return model, result
 
-    # model.print(result)
-
-    # print('mrGFR (ml/min): ', result['pars']['GFR_lk'] * 60 + result['pars']['GFR_rk'] * 60)
-    # print('nmGFR (ml/min): ', data['nmGFR'] * 60)
-
 
 def concatenate_results(outputdir):
     all_outputdir = os.path.join(outputdir, 'all_results')
