@@ -3,6 +3,14 @@ import pydmr
 
 def load_spogis(datafile):
 
+    # Some datasets are corrupted after a certain time point
+    # Truncating these manually
+    tmax = {
+        '11': 9, # max time in minutes
+        '14': 8,
+        '19': 8.5,
+    }
+
     data = pydmr.read(datafile, 'nest')
 
     subjects = list(data['rois'].keys())
@@ -19,6 +27,13 @@ def load_spogis(datafile):
         s_lk_int = np.interp(tint, time, data['rois'][subject]['study']['kidney_left_mean'])
         s_rk_int = np.interp(tint, time, data['rois'][subject]['study']['kidney_right_mean'])
 
+        if subject in tmax:
+            idx = tint < tmax[subject] * 60
+            tint = tint[idx]
+            s_ao_int = s_ao_int[idx]
+            s_lk_int = s_lk_int[idx]
+            s_rk_int = s_rk_int[idx]
+
         input_data[subject] = {
             'dt': 0.1,
             'agent': data['pars'][subject]['study']['agent'],
@@ -26,6 +41,7 @@ def load_spogis(datafile):
             'rate': data['pars'][subject]['study']['rate'],
             'FA': data['pars'][subject]['study']['FA'],
             'TR': data['pars'][subject]['study']['TR'],
+            'TE': 0.001, #Estimate - awaiting data
             'field_strength': data['pars'][subject]['study']['field_strength'],
             'Nph': int(ts / data['pars'][subject]['study']['TR']),
             'Nk0': int(ts / data['pars'][subject]['study']['TR'] / 2),
@@ -35,6 +51,7 @@ def load_spogis(datafile):
             'tS_ao': tint,
             'tS_lk': tint,
             'tS_rk': tint,
+            'H': data['pars'][subject]['study']['H'],
             'vol_lk': data['pars'][subject]['study']['vol_lk'],
             'vol_rk': data['pars'][subject]['study']['vol_rk'],
             'weight': data['pars'][subject]['study']['weight'],
